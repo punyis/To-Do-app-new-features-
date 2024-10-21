@@ -7,7 +7,7 @@
           <li>
             <%= link_to "Incomplete",
               todos_path(status: "incomplete"),
-              class: "todo-link incomplete-link #{'active' if params[:status] != 'complete'}"
+              class: "todo-link incomplete-link #{'active' if params[:status] != 'incomplete'}"
             %>
           </li>
           <li>

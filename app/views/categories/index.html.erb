@@ -1,0 +1,16 @@
+<div class="category-header">
+  <h1 class="category-title">CATEGORIES</h1>
+  <%= link_to 'new', new_category_path, class: "new-category-link" %>
+  
+  <table class="category-table">
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          
+            <%= link_to category.name, category, class: "category-name" %>
+          
+        </tr>
+      <% end %>
+     <tbody>
+  </table>
+</div>

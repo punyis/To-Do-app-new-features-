@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="content">
+    <h3 class="category-title-detail"><%= @category.name %></h3>
+    <div class="button-group">
+      <%= link_to "Edit", edit_category_path(@category), class: "edit-category-link" %>
+      <%= link_to "Back", categories_path, class: "back-link" %>
+      <%= button_to "Delete", @category, method: :delete, data: { confirm: "Are you sure?" }, class: "delete-category-button" %>
+    </div>
+
+    <%= turbo_frame_tag "todos-container", class: "todos-frame" do %>
+      <div class="todos-header">
+        <ul class="todo-links">
+          <li>
+            <%= link_to "Incomplete",
+              todos_path(status: "incomplete"),
+              class: "todo-link incomplete-link #{'active' if params[:status] != 'complete'}"
+            %>
+          </li>
+          <li>
+            <%= link_to "Complete",
+              todos_path(status: "complete"),
+              class: "todo-link complete-link #{'active' if params[:status] == 'complete'}"
+            %>
+          </li>
+        </ul>
+      </div>
+
+      <% unless params[:status] == "complete" %>
+        <div class="todo-form">
+          <%= render "todos/form", todo: Todo.new(category: @category) %>
+        </div>
+      <% end %>
+
+      <ul id="todos">
+        <%= render @category.todos %>
+      </ul>
+    <% end %>
+  </div>
+</div>

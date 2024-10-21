@@ -22,11 +22,13 @@ end
 
   # GET /todos/1 or /todos/1.json
   def show
+    
   end
 
   # GET /todos/new
   def new
     @todo = Todo.new
+    @category = Category.find(params[:category_id]) if params[:category_id]
   end
 
   # GET /todos/1/edit
@@ -35,7 +37,9 @@ end
 
   # POST /todos or /todos.json
   def create
-    @todo = Todo.new(todo_params)
+    @category = Category.find(params[:todo][:category_id])
+    @todo = @category.todos.new(todo_params)
+    @todo.status = "incomplete"
 
     respond_to do |format|
       if @todo.save
@@ -81,6 +85,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.require(:todo).permit(:name, :status)
+      params.require(:todo).permit(:name, :status, :category_id)
     end
 end

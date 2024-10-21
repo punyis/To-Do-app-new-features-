@@ -11,6 +11,7 @@
   <% end %>
   
   <div class="form-fields">
+  <%= form.hidden_field :category_id, value: @category&.id %>
     <%= form.text_field :name, class: "todo-input", placeholder: "Add a new todo..." %>
     <%= form.submit class: "todo-submit" %>
   </div>
